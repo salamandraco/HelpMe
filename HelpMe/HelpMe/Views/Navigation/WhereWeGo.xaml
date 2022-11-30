@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HelpMe.Views.Navigation.WhereWeGo"
+             xmlns:sombras="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
+             xmlns:toolkit="http://xamarin.com/schemas/2020/toolkit">
+
+    <Grid BackgroundColor="White">
+        <Grid RowDefinitions="auto,*">
+            <sombras:Shadows CornerRadius="0"
+                             Shades="{sombras:SingleShade 
+                                Offset='0,5', Opacity=0.39, Color=Gray,BlurRadius=10}">
+                <StackLayout Padding="20,5"
+                             BackgroundColor="White">
+                    <StackLayout Orientation="Horizontal">
+                        <Image Source="https://i.ibb.co/k5gTQFK/flecha-izquierda-2.png"
+                           HeightRequest="20"
+                           HorizontalOptions="Start"/>
+                        <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center">
+                            <Frame CornerRadius="50"
+                               VerticalOptions="Center"
+                               Padding="3"
+                               HasShadow="False">
+                                <Frame.Background>
+                                    <RadialGradientBrush>
+                                        <GradientStop Color="White"
+                                                  Offset="0.1"/>
+                                        <GradientStop Color="White"
+                                                  Offset="0.1"/>
+                                        <GradientStop Color="White"
+                                                  Offset="0.1"/>
+                                        <GradientStop Color="#E9E9E9"
+                                                  Offset="0.1"/>
+                                        <GradientStop Color="LightGray"
+                                                  Offset="1.0"/>
+                                    </RadialGradientBrush>
+                                </Frame.Background>
+                                <Image Source="https://i.ibb.co/VQy5z4d/usuario-masculino-1.png"
+                                   HeightRequest="17"
+                                   Margin="4"/>
+
+                            </Frame>
+                            <Label Text="Para Mi"
+                               VerticalOptions="Center"
+                               TextColor="Black"/>
+                            <Image Source="https://i.ibb.co/64647fr/flecha-hacia-abajo.png"
+                               HeightRequest="10"/>
+                        </StackLayout>
+
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout VerticalOptions="Center"
+                                     Margin="0,0,12,0">
+                            <BoxView BackgroundColor="Black"
+                                 HeightRequest="6"
+                                 WidthRequest="6"
+                                 CornerRadius="10"
+                                 HorizontalOptions="Center"/>
+                            <Line HeightRequest="50"
+                              BackgroundColor="#AFAFAF"
+                              WidthRequest="2"
+                              HorizontalOptions="Center"
+                              Margin="0,-5"/>
+                            <BoxView BackgroundColor="Black"
+                                 HeightRequest="6"
+                                 WidthRequest="6"
+                                 HorizontalOptions="Center" />
+                        </StackLayout>
+                        <StackLayout HorizontalOptions="FillAndExpand">
+                            <StackLayout>
+                                <Frame BackgroundColor="#F9F9F9"
+                               HasShadow="False"
+                               Padding="2,1"
+                               CornerRadius="0">
+                                    <SearchBar FontSize="Subtitle"
+                                           TextColor="Black"
+                                           TranslationX="-45"
+                                           x:Name="txtOrigen"
+                                           IsEnabled="{Binding EnabledTxtOrigen}"
+                                           Text="{Binding TxtOrigen, Mode=TwoWay}">
+                                        <SearchBar.Behaviors>
+                                            <toolkit:EventToCommandBehavior
+                                            EventName="TextChanged"
+                                            Command="{Binding SearchCommand}" CommandParameter="{Binding Text, Source={x:Reference txtOrigen}}"/>
+                                        </SearchBar.Behaviors>
+                                    </SearchBar>
+                                </Frame>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectOrigenCommand}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                            <StackLayout>
+                                <Frame BackgroundColor="#F9F9F9"
+                               HasShadow="False"
+                               Padding="2,1"
+                               CornerRadius="0">
+                                    <SearchBar FontSize="Subtitle"
+                                           TextColor="Black"
+                                           TranslationX="-45"
+                                           Placeholder="¿A donde vamos?"
+                                           x:Name="txtDestino"
+                                           IsEnabled="{Binding EnabledTxtDestino}"
+                                           Text="{Binding TxtDestino, Mode=TwoWay}">
+                                        <SearchBar.Behaviors>
+                                            <toolkit:EventToCommandBehavior
+                                            EventName="TextChanged"
+                                            Command="{Binding SearchCommand}" CommandParameter="{Binding Text, Source={x:Reference txtDestino}}"/>
+                                        </SearchBar.Behaviors>
+                                    </SearchBar>
+                                </Frame>
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding SelectDestinoCommand}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </sombras:Shadows>
+            <Frame Grid.Row="1"
+                   Padding="0"
+                   Margin="20,10"
+                   HasShadow="False"
+                   CornerRadius="20">
+
+                <maps:Map x:Name="MapaGo"/>
+            </Frame>
+            <Button Text="Listo"
+                    BackgroundColor="Black"
+                    Grid.Row="1"
+                    VerticalOptions="End"
+                    TextColor="White"
+                    HorizontalOptions="Start"
+                    WidthRequest="180"
+                    CornerRadius="10"
+                    Margin="30"
+                    FontAttributes="Bold"
+                    HeightRequest="50"/>
+            <!-- Fin ListAddress -->
+
+            <Grid Grid.Row="1" 
+                  BackgroundColor="white"
+                  Padding="20"
+                  IsVisible="{Binding VisibleListAddress}">
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout BindableLayout.ItemsSource="{Binding ListAddress}"
+                                     x:Name="ListAddressLocation">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Frame Padding="5"
+                                       BackgroundColor="#B6B6B6"
+                                       CornerRadius="50"
+                                       VerticalOptions="CenterAndExpand">
+                                            <Image Source="https://i.ibb.co/sjVc8fh/fijado.png"
+                                           HeightRequest="30"/>
+                                        </Frame>
+                                        <StackLayout>
+                                            <Label Text="{Binding StructuredFormatting.MainText}"
+                                           TextColor="Black"
+                                           FontSize="Subtitle"/>
+                                            <Label Text="{Binding StructuredFormatting.SecondaryText}"/>
+                                        </StackLayout>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SelectAddressCommand, Source={x:Reference ListAddressLocation}}" CommandParameter="{Binding .}" />
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Frame Padding="5"
+                                       BackgroundColor="#B6B6B6"
+                                       CornerRadius="50"
+                                       VerticalOptions="CenterAndExpand">
+                                <Image Source="https://i.ibb.co/sjVc8fh/fijado.png"
+                                           HeightRequest="30"/>
+                            </Frame>
+                            <StackLayout>
+                                <Label Text="Fija la ubicacion en el mapa"
+                                           TextColor="Black"
+                                           FontSize="Subtitle"
+                                           VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+            <!--Fin ListAddress-->
+
+
+        </Grid>
+
+    </Grid>
+</ContentPage>
