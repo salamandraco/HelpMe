@@ -83,8 +83,12 @@
     <PackageReference Include="Xamarin.Forms.Visual.Material">
       <Version>5.0.0.2515</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.GooglePlayServices.Auth">
+      <Version>120.3.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GoogleManager.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HelpMe.Views.Register.CrearCuenta">
+    <StackLayout Padding="20"
+                 Spacing="30">
+        <Label Text="Selecciona tu cuenta google"
+               FontSize="Medium"
+               TextColor="Black"/>
+        <Label Text="Si continuas es posible que recibas un SMS para verificar la cuenta. Se pueden aplicar los precios de mensajes y datos."/>
+        <Frame HasShadow="False"
+               BackgroundColor="#EEEEEE"
+               CornerRadius="0"
+               BorderColor="Black"
+               Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="https://i.ibb.co/VtScjWv/google.png"
+                       HeightRequest="35"/>
+                <Label Text="Continuar con Google"
+                       HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"
+                       TextColor="Black"/>
+            </StackLayout>
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GmailCommand}"/>
+            </Frame.GestureRecognizers>
+        </Frame>
+    </StackLayout>
+</ContentPage>

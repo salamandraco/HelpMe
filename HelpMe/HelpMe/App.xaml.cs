@@ -1,7 +1,9 @@
-﻿using HelpMe.Views.Navigation;
-using System;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using HelpMe.Views.Navigation;
+using HelpMe.Views.Register;
+
 
 namespace HelpMe
 {
@@ -12,7 +14,7 @@ namespace HelpMe
             InitializeComponent();
 
             MainPage = new MainPage();
-            MainPage = new NavigationPage(new WhereWeGo());
+            MainPage = new NavigationPage(new CrearCuenta());
         }
 
         protected override void OnStart()
